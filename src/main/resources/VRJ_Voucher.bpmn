@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0hd0xf6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+  <bpmn:process id="puVoucher" name="puVoucher Integromat ADD and GET" isExecutable="true">
+    <bpmn:startEvent id="Event_0qz0sr9">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="voucherID" label="Voucher: voucherID" type="string" />
+          <camunda:formField id="customerName" label="Voucher: customerName" type="string" />
+          <camunda:formField id="address" label="Voucher: address" type="string" />
+          <camunda:formField id="town" label="Voucher: town" type="string" />
+          <camunda:formField id="value" label="Voucher: value" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1jtt6d2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_13s3soa">
+      <bpmn:incoming>Flow_0n4p2bb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1f1kebv" name="GET Order Handling">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/vcdetqfei7cpglgeir2jerijtgjgw65s</camunda:inputParameter>
+            <camunda:outputParameter name="orderHandling">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+puVoucher=object.puVoucher
+</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0d9frt2</bpmn:incoming>
+      <bpmn:outgoing>Flow_18t0aq7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1edv48b" name="ADD/Generate Voucher">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/yn19jogjp4pse43256nie9ktaowjvr4u</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+"voucherID" : voucherID
+,"customerName" : customerName
+,"address" : address
+,"town" : town
+,"value" : value
+});
+</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jtt6d2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0d9frt2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1xox2c9" name="Show Order Handling">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="puVoucher" label="actual puVoucher" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18t0aq7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0n4p2bb</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1jtt6d2" sourceRef="Event_0qz0sr9" targetRef="Activity_1edv48b" />
+    <bpmn:sequenceFlow id="Flow_0n4p2bb" sourceRef="Activity_1xox2c9" targetRef="Event_13s3soa" />
+    <bpmn:sequenceFlow id="Flow_0d9frt2" sourceRef="Activity_1edv48b" targetRef="Activity_1f1kebv" />
+    <bpmn:sequenceFlow id="Flow_18t0aq7" sourceRef="Activity_1f1kebv" targetRef="Activity_1xox2c9" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="puVoucher">
+      <bpmndi:BPMNEdge id="Flow_1jtt6d2_di" bpmnElement="Flow_1jtt6d2">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="233" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0n4p2bb_di" bpmnElement="Flow_0n4p2bb">
+        <di:waypoint x="623" y="120" />
+        <di:waypoint x="655" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d9frt2_di" bpmnElement="Flow_0d9frt2">
+        <di:waypoint x="333" y="120" />
+        <di:waypoint x="383" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18t0aq7_di" bpmnElement="Flow_18t0aq7">
+        <di:waypoint x="483" y="120" />
+        <di:waypoint x="523" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0qz0sr9_di" bpmnElement="Event_0qz0sr9">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13s3soa_di" bpmnElement="Event_13s3soa">
+        <dc:Bounds x="655" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1f1kebv_di" bpmnElement="Activity_1f1kebv">
+        <dc:Bounds x="383" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1edv48b_di" bpmnElement="Activity_1edv48b">
+        <dc:Bounds x="233" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xox2c9_di" bpmnElement="Activity_1xox2c9">
+        <dc:Bounds x="523" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

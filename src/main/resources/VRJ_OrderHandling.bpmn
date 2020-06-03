@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tdf9pp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+  <bpmn:process id="OrderHandling" name="Order Handling Integromat ADD and GET" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="orderID" label="Order Handling: orderID " type="string" />
+          <camunda:formField id="articleCount" label="Order Handling: articleCount " type="string" />
+          <camunda:formField id="shippment" label="OrderHandling: shippment" type="string" />
+          <camunda:formField id="timeStamp" label="Order Handling: timeStamp" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_13ebuv1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="orderHandlingGET" name="GET Order Handling">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/gy876jedt6rnett6rw0ls4ra6hmnxfod</camunda:inputParameter>
+            <camunda:outputParameter name="orderHandling">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+orderHandling=object.orderHandling
+</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rlbe3o</bpmn:incoming>
+      <bpmn:outgoing>Flow_16rhlrf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_02q0ott">
+      <bpmn:incoming>Flow_0v5se2j</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_13ebuv1" sourceRef="StartEvent_1" targetRef="Activity_1vvrmxu" />
+    <bpmn:sequenceFlow id="Flow_0rlbe3o" sourceRef="Activity_1vvrmxu" targetRef="orderHandlingGET" />
+    <bpmn:serviceTask id="Activity_1vvrmxu" name="ADD Order Handling Information">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/gy876jedt6rnett6rw0ls4ra6hmnxfod</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+"orderID" : orderID
+,"articleCount" : articleCount
+,"shippment" : shippment
+,"timeStamp" : timeStamp
+});
+</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_13ebuv1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rlbe3o</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_16rhlrf" sourceRef="orderHandlingGET" targetRef="Activity_1122m6i" />
+    <bpmn:sequenceFlow id="Flow_0v5se2j" sourceRef="Activity_1122m6i" targetRef="Event_02q0ott" />
+    <bpmn:userTask id="Activity_1122m6i" name="Show Order Handling">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="orderHandling" label="actual Order Handling" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_16rhlrf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v5se2j</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="OrderHandling">
+      <bpmndi:BPMNEdge id="Flow_13ebuv1_di" bpmnElement="Flow_13ebuv1">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="260" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rlbe3o_di" bpmnElement="Flow_0rlbe3o">
+        <di:waypoint x="360" y="117" />
+        <di:waypoint x="410" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16rhlrf_di" bpmnElement="Flow_16rhlrf">
+        <di:waypoint x="510" y="117" />
+        <di:waypoint x="550" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v5se2j_di" bpmnElement="Flow_0v5se2j">
+        <di:waypoint x="650" y="117" />
+        <di:waypoint x="682" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03tklxy_di" bpmnElement="orderHandlingGET">
+        <dc:Bounds x="410" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02q0ott_di" bpmnElement="Event_02q0ott">
+        <dc:Bounds x="682" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03her0i_di" bpmnElement="Activity_1vvrmxu">
+        <dc:Bounds x="260" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qg7fqa_di" bpmnElement="Activity_1122m6i">
+        <dc:Bounds x="550" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
