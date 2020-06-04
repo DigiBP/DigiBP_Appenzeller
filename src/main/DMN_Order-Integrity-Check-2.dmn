@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1tukdqx" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="Decision_09nz16p" name="Decision 1">
+    <extensionElements>
+      <biodi:bounds x="157" y="81" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Customer Name">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>CustomerName</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_199otu8" label="Customer Address">
+        <inputExpression id="LiteralExpression_1496fbv" typeRef="string">
+          <text>CustomerAddress</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_17wftdw" label="Customer E-Mail">
+        <inputExpression id="LiteralExpression_0ezwypc" typeRef="string">
+          <text>CustomerEMail</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0t6wiwa">
+        <inputExpression id="LiteralExpression_1weq56f" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Order Integrity" name="orderIntegrity" typeRef="string" />
+      <output id="OutputClause_0pgvcjz" label="Explanation" name="explanation" typeRef="string" />
+      <rule id="DecisionRule_1v4t8wn">
+        <inputEntry id="UnaryTests_00i01me">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ic2fy0">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pxkm7w">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19m86gg">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1s0lswx">
+          <text>"success"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1o0k3pj">
+          <text>-</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m0ikv7">
+        <inputEntry id="UnaryTests_03jd7uz">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lk4zo3">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gb6eqh">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ti8ojx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0twyd5d">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1udoct9">
+          <text>"We are missing the customer's address"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0p9n8zl">
+        <inputEntry id="UnaryTests_1i4bkkm">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y3gbm7">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12dpm6c">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17rqnul">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hyn1i7">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1w7kcz9">
+          <text>"We are missing the customer's e-mail"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0l0bg6n">
+        <inputEntry id="UnaryTests_11jh9gs">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kfukxu">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f3kkx0">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vnj90p">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h0o7a4">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11bs1vq">
+          <text>"We are missing the customer's address and e-mail"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0e7gt4k">
+        <inputEntry id="UnaryTests_1271kvk">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k1t0m1">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i7ww55">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12pbebx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ob30g7">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15q60hx">
+          <text>"We are missing the customer's name"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12vlqaz">
+        <inputEntry id="UnaryTests_1qn3fea">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uhjfid">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19k9wmz">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1twc6a1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jv3n7o">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09uc9r7">
+          <text>"We are missing the customer's name and address"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1vir7uf">
+        <inputEntry id="UnaryTests_1t14oia">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uv0943">
+          <text>"provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dwc5q2">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x8ofpj">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dhrj4w">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1x8ztlz">
+          <text>"We are missing the customer's name and e-mail"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jdurzw">
+        <inputEntry id="UnaryTests_0sma3qf">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ap8asc">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iiafjh">
+          <text>"not provided"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sevvv7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11rzwbc">
+          <text>"fail"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1j8vwfj">
+          <text>"We are missing the customer's name, address and e-mail"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ll4plj">
+        <inputEntry id="UnaryTests_0ooroc4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nozvhi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09rmqcd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hs5foc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m3zv8h">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tgthdx">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m6car0">
+        <inputEntry id="UnaryTests_1yed8so">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kya7ul">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kv61s1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jw8qnx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r07cjc">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tkl5ew">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0d0z621" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+  <bpmn:process id="puScan" name="puScan  Integromat ADD and GET" isExecutable="true">
+    <bpmn:startEvent id="Event_1jwj3jd">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="scanID" label="Scan: scanID" type="string" />
+          <camunda:formField id="puID" label="Scan: puID" type="string" />
+          <camunda:formField id="description" label="Scan: description" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_18lmypk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0zrxh8u">
+      <bpmn:incoming>Flow_1d56pzz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_096xh8z" name="GET Scan Information">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/8v1go9h2njya3xzv3r3jca4vstwj482d</camunda:inputParameter>
+            <camunda:outputParameter name="orderHandling">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+puScan=object.puScan
+</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02lxova</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jqg7ob</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_18hk1c8" name="ADD Scan">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/awrgpmhf0ayv5z56lagt9o42sgo602ua</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+"scanID" : scanID
+,"puID" : puID
+,"description" : description
+
+});
+</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18lmypk</bpmn:incoming>
+      <bpmn:outgoing>Flow_02lxova</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_0ym27qr" name="Show Scan Information">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="puScan" label="actual Scan" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0jqg7ob</bpmn:incoming>
+      <bpmn:outgoing>Flow_1d56pzz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_18lmypk" sourceRef="Event_1jwj3jd" targetRef="Activity_18hk1c8" />
+    <bpmn:sequenceFlow id="Flow_1d56pzz" sourceRef="Activity_0ym27qr" targetRef="Event_0zrxh8u" />
+    <bpmn:sequenceFlow id="Flow_02lxova" sourceRef="Activity_18hk1c8" targetRef="Activity_096xh8z" />
+    <bpmn:sequenceFlow id="Flow_0jqg7ob" sourceRef="Activity_096xh8z" targetRef="Activity_0ym27qr" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="puScan">
+      <bpmndi:BPMNEdge id="Flow_18lmypk_di" bpmnElement="Flow_18lmypk">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="233" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1d56pzz_di" bpmnElement="Flow_1d56pzz">
+        <di:waypoint x="623" y="120" />
+        <di:waypoint x="655" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02lxova_di" bpmnElement="Flow_02lxova">
+        <di:waypoint x="333" y="120" />
+        <di:waypoint x="383" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jqg7ob_di" bpmnElement="Flow_0jqg7ob">
+        <di:waypoint x="483" y="120" />
+        <di:waypoint x="523" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1jwj3jd_di" bpmnElement="Event_1jwj3jd">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zrxh8u_di" bpmnElement="Event_0zrxh8u">
+        <dc:Bounds x="655" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_096xh8z_di" bpmnElement="Activity_096xh8z">
+        <dc:Bounds x="383" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18hk1c8_di" bpmnElement="Activity_18hk1c8">
+        <dc:Bounds x="233" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ym27qr_di" bpmnElement="Activity_0ym27qr">
+        <dc:Bounds x="523" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0s8wo18" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="Decision_0xfhfbv" name="Decision 1">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Postcode">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>Postcode</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Pick Up Eligibility" name="pickUpEligibility" typeRef="string" />
+      <rule id="DecisionRule_182ex9h">
+        <inputEntry id="UnaryTests_099py4u">
+          <text>[8000..8006[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0o5owcx">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_041413k">
+        <inputEntry id="UnaryTests_1uep3zg">
+          <text>8008</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r3f1dh">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ybx8v8">
+        <inputEntry id="UnaryTests_1qg14wu">
+          <text>8032</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13w4qhb">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13qdccy">
+        <inputEntry id="UnaryTests_0hew9z2">
+          <text>[8037..8038[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11ghx4x">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_198fqa7">
+        <inputEntry id="UnaryTests_16psl7w">
+          <text>[8040..8041[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1b9c9le">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kwg3cc">
+        <inputEntry id="UnaryTests_0tox6ip">
+          <text>[8044..8053[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08v8ejo">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cvt5vs">
+        <inputEntry id="UnaryTests_0a1wzig">
+          <text>8055</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ewsau7">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_192ou1s">
+        <inputEntry id="UnaryTests_04w41hl">
+          <text>8057</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00q8vwn">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jmehss">
+        <inputEntry id="UnaryTests_0y07jef">
+          <text>[8063..8064[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04t6b79">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1t50d7b">
+        <inputEntry id="UnaryTests_1mlo41s">
+          <text>[8092..8093[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xd8vpu">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ymsoy6">
+        <inputEntry id="UnaryTests_1xq905k">
+          <text>8143</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j9ukuk">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xp8adt">
+        <inputEntry id="UnaryTests_1mrxngz">
+          <text>8054</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cohnob">
+          <text>"notok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1l2bgnj">
+        <inputEntry id="UnaryTests_0djsidz">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16myiz0">
+          <text>"notok"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
